@@ -1,0 +1,25 @@
+.active-me {
+  background-color: rgb(251, 187, 187);
+}
+.active {
+  background-color: rgb(251, 187, 187) !important;
+  border: none !important;
+}
+
+body {
+  background-color: white;
+}
+
+.list-group-item:hover {
+  background-color: #eee;
+}
+
+.navbar-nav {
+  margin-bottom: 10px;
+}
+
+h1,
+h3,
+h4 {
+  font-family: "Merienda One", cursive;
+}
