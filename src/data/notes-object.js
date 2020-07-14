@@ -561,4 +561,256 @@ export const notes = [
       </div>
     ),
   },
+  {
+    id: 3,
+    title: "Network Types & Topology",
+    content: (
+      <div>
+        <h1>Network Types & Topology</h1>
+        <hr />
+        <p>
+          Design of network
+          <br />
+          <b>Physical topology</b> : Actual layout of computer cables
+          (appearance)
+          <br />
+          <b>Logical/Signal topology</b> : The way actually devices communicate
+          internally
+        </p>
+        <hr />
+        <div>
+          <h4>Types of Network</h4>
+          <ol>
+            <li>
+              <b>LAN (Local Area Network)</b>
+              <ul>
+                <li>
+                  Group of computers and network devices connected together
+                  usually within the same building
+                </li>
+                <li>
+                  If two computer communicate without using internet and using
+                  some other cable or medium then no matter how far or near they
+                  are, they are part of LAN (usually cables not used to connect
+                  more than few kilometers)
+                </li>
+                <li>Maximum speed</li>
+                <li>Most secure</li>
+                <li>Less vulnerable</li>
+                <li>Generally routers not involved</li>
+                <li>Switches are most commonly used</li>
+                <li>
+                  cables : twisted pair, coaxial, ethernet cable, wifi
+                  connection etc.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <b>MAN (Metropolitan Area Network)</b>
+              <ul>
+                <li>
+                  It is large network that usually spans several buildings in
+                  the same city
+                </li>
+                <li>It is an extension of LAN</li>
+                <li>Here also internet is not used for communication</li>
+                <li>moderate speed, secure, vulnerable</li>
+                <li>cables : ethernet and similar to LAN</li>
+              </ul>
+            </li>
+            <li>
+              <b>WAN (Wide Area Network)</b>
+              <ul>
+                <li>Not restricted to a geographical area</li>
+                <li>
+                  If two computer communicate using internet then no matter how
+                  far or near they are, they are part of WAN
+                </li>
+                <li>Minimum speed</li>
+                <li>Least secure</li>
+                <li>Most vulnerable</li>
+                <li>Routers and switches are used</li>
+                <li>cables : optical fibres, satellite</li>
+              </ul>
+            </li>
+          </ol>
+        </div>
+        <hr />
+        <div>
+          <h4>Types of topology</h4>
+          <ol>
+            <li>
+              <b>Mesh</b>
+              <ul>
+                <li>Each computer connects to every other computer</li>
+                <li>
+                  High level of redundancy (if one breaks, alternate path
+                  available)
+                </li>
+                <li>Popular in WAN</li>
+                <li>Wiring is very complex as no. of nodes increase</li>
+                <li>Used nowadays to connect routers</li>
+                <li>Secure because of dedicated link</li>
+              </ul>
+            </li>
+            <li>
+              <b>Bus</b>
+              <ul>
+                <li>
+                  Uses a trunk or a back bone to which all the nodes are
+                  connected
+                </li>
+                <li>System connects to backbone with T connector</li>
+                <li>Coaxial cables were popular earlier</li>
+                <li>Requires less cable</li>
+                <li>Does not use any specialized network device</li>
+                <li>Unsecure (all nodes get the info)</li>
+                <li>If backbone breaks major part of network goes down</li>
+                <li>We don't use much nowadays because of above reasons</li>
+              </ul>
+            </li>
+            <li>
+              <b>Ring</b>
+              <ul>
+                <li>Data travel in circular fashion</li>
+                <li>
+                  Most commonly wired in physical star configuration, but
+                  logically ring
+                </li>
+                <li>
+                  Token ring topology
+                  <ul>
+                    <li>Solves collision</li>
+                    <li>
+                      MSAU(multi station access unit) provide token to nodes
+                      one-by-one, only the node with the token can communicate/
+                      send message
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <b>Tree</b>
+              <ul>
+                <li>Extension of bus and star (star + bus)</li>
+                <li>New nodes can be added easily</li>
+                <li>Root(trunk) breaks then network breaks</li>
+                <li>Extension(adding nodes) is easy</li>
+              </ul>
+            </li>
+            <li>
+              <b>Star</b>
+              <ul>
+                <li>
+                  All nodes connected to a centralised device called hub or
+                  switch
+                </li>
+                <li>
+                  Each device needs a single cable point-to-point communication
+                  between the device and hub
+                </li>
+                <li>Most widely implemented</li>
+                <li>Cable failure affects only single node</li>
+                <li>
+                  But central devices fails then whole network breaks (single
+                  point of failure)
+                </li>
+                <li>Easier to add new device</li>
+                <li>Easy to troubleshoot</li>
+              </ul>
+            </li>
+            <li>
+              <b>Hybrid</b>
+              <ul>
+                <li>Combination of two or more topology</li>
+                <li>Used in connecting existing networks</li>
+              </ul>
+            </li>
+          </ol>
+        </div>
+      </div>
+    ),
+  },
+  {
+    id: 4,
+    title: "MAC Address",
+    content: (
+      <div>
+        <h1>MAC Address</h1>
+        <hr />
+        <b>Also known as</b>
+        <ul>
+          <li>Media Access Control (Mobile)</li>
+          <li>Physical address (Laptop, PC)</li>
+          <li>Hardware address</li>
+          <li>Burnt-in-address (BIA) (Cisco route, switch)</li>
+        </ul>
+        <hr />
+        <ul>
+          <li>MAC address is globally unique</li>
+          <li>MAC address doesn't belong to laptop</li>
+          <li>
+            MAC address belongs to <b>Network Interface Card</b> present in
+            Laptop
+          </li>
+          <li>If NIC is changes MAC address gets changed</li>
+          <li>
+            Network Interface represent the ways in which a system can connect
+            to the internet
+          </li>
+          <li>
+            This can be
+            <ul>
+              <li>Ethernet RJ45 port</li>
+              <li>Wifi</li>
+              <li>Bluetooth ...etc.</li>
+            </ul>
+          </li>
+          <li>Each interface will have its own MAC Address</li>
+          <li>
+            A system will have as many MAC address as there are NICs in it
+          </li>
+          <li>
+            MAC address - 48 bits / 6 bytes
+            <ul>
+              <li>24 bits OUI (Organization Unique Identifier)</li>
+              <li>24 bits vendor specific</li>
+            </ul>
+          </li>
+          <li>
+            MAC address is represented in hexadecimal format
+            <ul>
+              <li>
+                <b>Eg. </b>34-AB-DE-14-FD-69 (laptop, PC)
+              </li>
+              <li>
+                <b>Eg. </b>34 : AB : DE : 14 : FD : 69 (Mobile)
+              </li>
+              <li>
+                <b>Eg. </b>34AB.DE14.FD69 (Router, switches)
+              </li>
+              <li>First 8 characters is the OUI</li>
+            </ul>
+          </li>
+          <li>
+            OUI is given by <b>IANA</b> - Internet Assigned Number Authority (It
+            cannot be same for 2 companies) (Public IP address is also granted
+            by them)
+          </li>
+          <li>
+            Vendor specific company decides on its own (it can be same, but in
+            overall unique)
+          </li>
+          <li>Switch will have a unique MAC address (all ports same)</li>
+          <li>Router has MAC address for each Interface (all ports diff)</li>
+          <li>
+            FF:FF:FF:FF:FF:FF is the <b>Broadcast MAC address</b> (This request
+            is accepted by all. This request shows that the sender wants to
+            resolve MAC address using ARP)
+          </li>
+        </ul>
+      </div>
+    ),
+  },
 ];
