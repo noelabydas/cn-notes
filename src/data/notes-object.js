@@ -813,4 +813,290 @@ export const notes = [
       </div>
     ),
   },
+  {
+    id: 5,
+    title: "IP Addressing",
+    content: (
+      <div>
+        <h1>IP Addressing</h1>
+        <hr />
+        <ul>
+          <li>Represents address of a device connected to a network</li>
+          <li>
+            Logical addressing
+            <ul>
+              <li>
+                IPv4
+                <ul>
+                  <li>Public IP</li>
+                  <li>Private IP</li>
+                </ul>
+              </li>
+              <li>IPv6</li>
+            </ul>
+          </li>
+        </ul>
+        <hr />
+        <div>
+          <h4>IPv4</h4>
+          <ul>
+            <li>32 bit logical addressing</li>
+            <li>4 octet (0-255)</li>
+            <li>IP address = network ID + host ID</li>
+            <li>
+              <b>Classes</b>
+              <ol>
+                <li>
+                  <b>Class A :</b> 1.0.0.0 to 126.0.0.0
+                </li>
+                <li>
+                  <b>Class B :</b> 128.0.0.0 to 191.255.0.0
+                </li>
+                <li>
+                  <b>Class C :</b> 192.0.0.0 to 223.255.255.0
+                </li>
+                <li>
+                  <b>Class D :</b> 224.0.0.0 - 239.0.0.0
+                </li>
+                <li>
+                  <b>Class E :</b> 240.0.0.0 - 255.0.0.0
+                </li>
+              </ol>
+            </li>
+            <li>
+              Generally we don't use Class D and E
+              <ul>
+                <li>D generally used for multicast</li>
+                <li>E generally used for research</li>
+              </ul>
+            </li>
+            <li>
+              127.0.0.0 is reserved for loopback address
+              <ul>
+                <li>
+                  To check if NIC card is broken do ping 127.0.0.1, if response
+                  is coming the problem is at the server end and not NIC
+                </li>
+              </ul>
+            </li>
+            <li>
+              To identify class, only check the first octet and find it lies in
+              which range
+            </li>
+            <li>N - reserved for network id, H - reserved for host id</li>
+            <ul>
+              <li>Class A - |N|H|H|H|</li>
+              <li>Class B - |N|N|H|H|</li>
+              <li>Class C - |N|N|N|H|</li>
+            </ul>
+            <li>
+              <b>Subnet mask</b>
+            </li>
+            <ul>
+              <li>Network bit is represented by 1</li>
+              <li>Host bit is represented by 0</li>
+              <li>
+                Following are the subnet masks
+                <ul>
+                  <li>Class A : 255.0.0.0</li>
+                  <li>Class B : 255.255.0.0</li>
+                  <li>Class C : 255.255.255.0</li>
+                  <li>
+                    xyz/n - make all starting n bits 1 and remaining zero to
+                    find its subnet mask
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <li>
+              <b>Public IP </b>needs to be purchased.
+            </li>
+            <li>
+              <b>Private IP </b>
+              <ul>
+                <li>
+                  This IP address can be used freely on local networks for
+                  connecting computer
+                </li>
+                <li>Hence we see it being used in colleges/universities</li>
+                <li>Class A - 10.0.0.0</li>
+                <li>Class B - 172.16.x.x - 172.31.x.x</li>
+                <li>Class C - 192.x.x.x</li>
+              </ul>
+            </li>
+            <li>
+              <b>Broadcast ID </b>is a specific address which is reserved for
+              broadcasting messages to all computers connected in the network
+            </li>
+            <li>
+              No. of usable IP address = 2<sup>(no. of bits of host part)</sup>{" "}
+              - 2 (one for network id and another for broadcast id)
+            </li>
+          </ul>
+        </div>
+      </div>
+    ),
+  },
+  {
+    id: 6,
+    title: "IPv4 Header",
+    content: (
+      <div>
+        <h1>IPv4 Header</h1>
+        <hr />
+        <div>
+          <ul>
+            <li>12 fields + 1 optional field</li>
+            <li>It is of 20 bytes size (excluding optional field)</li>
+            <li>It can have max size of 60 bytes (including optional field)</li>
+            <li>Header is appended before the packet data</li>
+            <li>Real world analogy : label on a box ordered from amazon</li>
+          </ul>
+          <hr />
+          <h4>IPv4 Header format</h4>
+          <p>(n) : size in bits</p>
+          <table
+            className="table table-sm table-bordered"
+            style={{ textAlign: "center" }}
+          >
+            <tbody>
+              <tr>
+                <td>Version(4)</td>
+                <td>IHL(4)</td>
+                <td>TOS(8)</td>
+                <td>Total length(16)</td>
+              </tr>
+              <tr>
+                <td>Identifiers(16)</td>
+                <td>Flags(3) </td>
+                <td colSpan="2">Fragment Offset(13)</td>
+              </tr>
+              <tr>
+                <td> TTL(8)</td>
+                <td>Protocol(16) </td>
+                <td colSpan="2">Checksum(16)</td>
+              </tr>
+              <tr>
+                <td colSpan="4">Source address(32)</td>
+              </tr>
+              <tr>
+                <td colSpan="4">Destination address(32)</td>
+              </tr>
+              <tr>
+                <td colSpan="4">Optional(0-40)</td>
+              </tr>
+            </tbody>
+          </table>
+          <ul>
+            <li>
+              Version
+              <ul>
+                <li>
+                  Version number of Internet protocol (1,2,3,4,5,6,7,8) (only 4
+                  and 6 used for addressing purpose)
+                </li>
+                <li>4 - 0100, 6 - 0110</li>
+              </ul>
+            </li>
+            <li>
+              IHL
+              <ul>
+                <li>Internet header length</li>
+                <li>Represents length of entire IP header</li>
+                <li>IHL field is scaled down by factor of 4</li>
+                <li>
+                  To get the size in bytes, multiply the the IHL value by 4
+                  (1111 - 60bytes)
+                </li>
+              </ul>
+            </li>
+            <li>
+              TOS
+              <ul>
+                <li>Type of service</li>
+                <li>
+                  It specifies datagram priority and request router for low
+                  delay, high throughput, etc.
+                </li>
+              </ul>
+            </li>
+            <li>
+              Total length
+              <ul>
+                <li>Length of entire IP packet (IP header + payload)</li>
+              </ul>
+            </li>
+            <li>
+              Identifier
+              <ul>
+                <li>
+                  If IP packet is fragmented during transmission, then all
+                  fragments contain the same identifier value to identify that
+                  they belong to the same packet
+                </li>
+              </ul>
+            </li>
+            <li>
+              Flags
+              <ul>
+                <li>This field tells if the packet can be fragmented or not</li>
+                <li>MSB is always 0</li>
+                <li>001 - fragment allowed</li>
+                <li>000 - fragments not allowed</li>
+                <li>
+                  If packet is very large and it cannot be fragmented then
+                  router discards the packet and sends an ICMP message to the
+                  sender to reduce the packet size
+                </li>
+              </ul>
+            </li>
+            <li>
+              Fragment Offset
+              <ul>
+                <li>Tells position of fragment in original IP packet</li>
+              </ul>
+            </li>
+            <li>
+              TTL (IPv4) (in IPv6 it is called hop count)
+              <ul>
+                <li>Time to live</li>
+                <li>
+                  To avoid looping every packet is sent with some TTL value
+                </li>
+                <li>
+                  This value tells how many routers this packet can cross at
+                  each router
+                </li>
+                <li>At every hop value is reduced by one</li>
+              </ul>
+            </li>
+            <li>
+              Protocol
+              <ul>
+                <li>
+                  Tells network layer at the destination host to which protocol
+                  this packet belongs
+                </li>
+                <li>
+                  <b>Eg.</b> TCP is 6, UDP is 17
+                </li>
+              </ul>
+            </li>
+            <li>
+              Header checksum
+              <ul>
+                <li>Checks for error in ONLY header</li>
+              </ul>
+            </li>
+            <li>
+              Source and destination address
+              <ul>
+                <li>IP address of source and destination</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    ),
+  },
 ];
