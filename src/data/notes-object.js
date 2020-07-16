@@ -934,6 +934,53 @@ export const notes = [
             </li>
           </ul>
         </div>
+        <hr />
+        <div>
+          <h4>IPv6</h4>
+          <ul>
+            <li>128 bits divided into eight 16 bits segment</li>
+            <li>Not backward compatible with IPv4</li>
+            <li>No broadcast support (anycast support)</li>
+            <li>No class concept</li>
+            <li>
+              Represented in hexadecimal. Each segment will have 4 hex character
+            </li>
+            <li>
+              If two or more consecutive 0 segments are there then replace it
+              with :: (abbreviated IP)
+            </li>
+            <li>
+              If two disjoint segments of 0s are there then :: represents
+              largest consecutive 0 segment (if both same then use left-most)
+            </li>
+            <li>2 times :: cannot be present</li>
+            <li>We can remove leading zeros of each segment</li>
+          </ul>
+          <b>Convert IPv4 to IPv6</b>
+          <ul>
+            <li>Make the first 80 bits starting from left to 0</li>
+            <li>Set the next 16 bits to 1</li>
+            <li>Finally the last 32 bits is replaced with IPv4</li>
+          </ul>
+          <b>Dual stack router</b> works with both IPv4 and IPv6.
+          <br />
+          <br />
+          <b>Tunneling</b>
+          <br /> Intermediate network devices may not work on IPv6. So IPv6
+          packet is encapsulated in another packet containing IPv4 address. At
+          the receiver end IPv6 is recovered by removing the encapsulation (if
+          device only works with IPv6 then vice-versa happens).
+          <br />
+          <br />
+          <b>NAT</b>
+          <br />
+          It enables private IP networks that use unregistered IP addresses to
+          connect to the Internet. NAT operates on a router, usually connecting
+          two networks together, and translates the private (not globally
+          unique) addresses in the internal network into legal addresses, before
+          packets are forwarded to another network. (NAT protocol translation or
+          header translation. Header is translated between version 4 and 6).
+        </div>
       </div>
     ),
   },
@@ -1095,6 +1142,19 @@ export const notes = [
               </ul>
             </li>
           </ul>
+          <hr />
+          <h4>IPv6 header</h4>
+          40 bits - 8 fields
+          <ol>
+            <li>Version</li>
+            <li>Traffic class</li>
+            <li>Flow label</li>
+            <li>Payload length</li>
+            <li>Next header</li>
+            <li>Hop length</li>
+            <li>Source address</li>
+            <li>Destination address</li>
+          </ol>
         </div>
       </div>
     ),
@@ -1232,6 +1292,272 @@ export const notes = [
             </li>
           </ol>
         </div>
+      </div>
+    ),
+  },
+  {
+    id: 9,
+    title: "Domain Name System",
+    content: (
+      <div>
+        <h1>Domain Name System (DNS)</h1>
+        <hr />
+        <ul>
+          <li>DNS is a host name to IP address translational service</li>
+          <li>Analogous to phonebook in our mobile</li>
+          <li>Used for host name to IP address resolution</li>
+          <li>
+            It can also convert from IP address to host name (forward and
+            reverse lookups)
+          </li>
+          <li>It is an Application layer protocol</li>
+          <li>
+            Previously before DNS all the hostnames where stored in host.txt
+            file
+          </li>
+          <li>6 top level domains included - com, org, mil, biz, net, edu</li>
+          <li>Country level domain also exist - in, uk, jp, us</li>
+          <li>DNS server is highly targeted for hacking purpose</li>
+          <li>
+            It uses TCP and UDP on port 53 (most of the time UDP is used as its
+            fast)
+          </li>
+          <li>Today DNS supports 13 root name servers (A to M)</li>
+          <li>
+            There are two ways to resolve an IP address
+            <ul>
+              <li>By building a host table on each router</li>
+              <li>By building a DNS server</li>
+            </ul>
+          </li>
+        </ul>
+        <b>Domain</b>
+        <ul>
+          <li>Generic (com, org)</li>
+          <li>Country (in, uk)</li>
+          <li>Inverse (IP to domain name mapping)</li>
+        </ul>
+        <b>Namespace</b>
+        <ul>
+          <li>A namespace maps each address to a unique name</li>
+          <li>
+            Namespace
+            <ul>
+              <li>
+                Flat structure
+                <ul>
+                  <li>
+                    In this method, names are assigned to an address. It is
+                    sequence of characters without any structure
+                  </li>
+                  <li>Can't be used in large system</li>
+                </ul>
+              </li>
+              <li>
+                Hierarchical structure
+                <ul>
+                  <li>Name is made of several paths</li>
+                  <li>Namespace can be decentralised</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <b>Hierarchy of name servers</b>
+        <ul>
+          <li>
+            Root name server
+            <ul>
+              <li>
+                It is contacted by Name servers that cannot resolve the name
+              </li>
+              <li>
+                It contacts the Top level name server if the name mapping is not
+                known.
+              </li>
+              <li>It then gets the mapping and returns the IP address</li>
+            </ul>
+          </li>
+          <li>
+            Top level server
+            <ul>
+              <li>
+                It is responsible for .com, .org, .edu etc. and all top level
+                country domain like .in, .uk
+              </li>
+              <li>
+                They have information about Authoritative domain servers and
+                know the names and IP addresses of each Authoritative name
+                server for second level domains
+              </li>
+            </ul>
+          </li>
+          <li>
+            Authoritative name server
+            <ul>
+              <li>
+                It can be maintained by an organization or service provider. In
+                order to reach facebook.com we have to ask the root DNS server.
+                Then it will point out to the top level domain server, and then
+                to the authoritative domain name server which actually contains
+                the IP address. So an authoritative server will return the
+                associated IP address.
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <hr />
+        <h4>Domain name resolution</h4>
+        <div>
+          Name resolution takes place from right to left. <b>Eg. </b>
+          google.co.in (first .in, then .co and finally google)
+          <ul>
+            <li>
+              When a request is made, machine first checks its cache to see
+              whether the address is present
+            </li>
+            <li>
+              If it is not present then machine contacts the ISP (Intenet
+              service provide)
+            </li>
+            <li>Then it calls the root DNS</li>
+            <li>Then the top level DNS is checked</li>
+            <li>Then finally authoritative DNS returns the IP address</li>
+          </ul>
+          In each of the above steps, fist the cache is checked and the reduest
+          is forwarded only if cache miss occurs.
+          <br />
+          <b>Ways of name resolution</b>
+          <ol>
+            Let's suppose we are trying to resolve abc.xyz.in
+            <li>
+              <b>Recursive</b>
+              <ul>
+                <li>Host machine contacts local name server</li>
+                <li>Local name server contact root name server</li>
+                <li>Root name server contacts intermediary name server</li>
+                <li>
+                  The intermediary name server contacts the final root name
+                  server
+                </li>
+                <li>
+                  Final root name server returns the IP address along with the
+                  name of NS authoritative for the domain abc.xyz.in to the
+                  intermediary name server
+                </li>
+                <li>
+                  Intermediary name server returns all IP addresses and name of
+                  NS authoritative for the domain xyz.in to root name server
+                </li>
+                <li>
+                  Root name server returns all IP addresses and name of NS
+                  authoritative for the TLD .in to the local name server
+                </li>
+                <li>
+                  Local name server caches all answers and returns the ressolved
+                  name to the host machine
+                </li>
+              </ul>
+            </li>
+            <li>
+              <b>Iterative</b>
+              <ul>
+                <li>Host machine contacts local name server</li>
+                <li>Local name server contact root name server</li>
+                <li>
+                  Root name server returns all IP addresses and name of NS
+                  authoritative for the TLD .in to the local name server
+                </li>
+                <li>Local name server contacts intermediary name server</li>
+                <li>
+                  Intermediary name server returns all IP addresses and name of
+                  NS authoritative for the domain xyz.in to local name server
+                </li>
+                <li>Local name server contacts final root name server</li>
+                <li>
+                  Final root name server returns the IP address along with the
+                  name of NS authoritative for the domain abc.xyz.in to the
+                  local name server
+                </li>
+                <li>
+                  Local name server caches all answers and returns the ressolved
+                  name to the host machine
+                </li>
+              </ul>
+            </li>
+          </ol>
+          <b>Fully qualified domain name</b>
+          <ul>
+            <li>In this label is terminated by null string (.)</li>
+            <li>
+              <b>Eg.</b> abc.xyz.in. - here . represents root, i.e. the domain
+              name represents path till root
+            </li>
+            <li>FQDM represents path from leaf to root.</li>
+            <li>It contains full name of the host.</li>
+          </ul>
+          <b>Partially qualified domain name</b>
+          <ul>
+            <li>In this the label is not terminated by null string (.)</li>
+            <li>
+              <b>Eg.</b> abc.xyz.com - doesn't end with .
+            </li>
+            <li>
+              PQDM starts from a leaf node but does not reach the root or does
+              not start from leaf.
+            </li>
+          </ul>
+        </div>
+      </div>
+    ),
+  },
+  {
+    id: 10,
+    title: "Dynamic Host Configuration Protocol",
+    content: (
+      <div>
+        <h1>Dynamic Host Configuration Protocol - DHCP</h1>
+        <hr />
+      </div>
+    ),
+  },
+  {
+    id: 11,
+    title: "Address Resolution Protocol",
+    content: (
+      <div>
+        <h1>Address Resolution Protocol - ARP</h1>
+        <hr />
+      </div>
+    ),
+  },
+  {
+    id: 12,
+    title: "WiFi",
+    content: (
+      <div>
+        <h1>WiFi - Wireless Fidelity</h1>
+        <hr />
+      </div>
+    ),
+  },
+  {
+    id: 13,
+    title: "HTTP/HTTPS",
+    content: (
+      <div>
+        <h1>HTTP/HTTPS</h1>
+        <hr />
+      </div>
+    ),
+  },
+  {
+    id: 14,
+    title: "Other protocols",
+    content: (
+      <div>
+        <h1>Other protocols</h1>
+        <hr />
       </div>
     ),
   },
