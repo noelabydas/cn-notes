@@ -1099,4 +1099,140 @@ export const notes = [
       </div>
     ),
   },
+  {
+    id: 7,
+    title: "Subnetting",
+    content: (
+      <div>
+        <h1>Subnetting</h1>
+        <hr />
+        <div>
+          If IP addresses are limited and getting used up quickly then what is
+          the solution:
+          <ul>
+            <li>Use private IP</li>
+            <li>Use IPv6</li>
+            <li>Subnetting</li>
+          </ul>
+          <b>Subnetting : </b>network within a network (logical division of IP
+          address)
+          <ul>
+            <li>
+              If we want to connect 10 computers to a network and the network ID
+              is 15.0.0.0
+            </li>
+            <li>
+              The total number of available IP addresses are 2^24-2 but we are
+              only using 10 addresses.
+            </li>
+            <li>
+              The remaining addresses cannot be used for computer in other
+              networks connected to router (all interfaces of a router should be
+              connected to different Network ID, otherwise router will be
+              confused).
+            </li>
+            <li>This wastage of IP addresses is solved through subnetting.</li>
+          </ul>
+          <b>/n :</b> Subnet or CIDR values (no. of bits reserved for network
+          id)
+          <br />
+          <b>CIDR</b> Class Inter Domain Routing
+          <ul>
+            <li>Class A addr/8 Eg. 15.10.0.0/8</li>
+            <li>Class B addr/16</li>
+            <li>Class C addr/24</li>
+          </ul>
+          If above numbers are written after IP addresses then no subnetting has
+          been done, if any other number is there then subnetting has been done.
+          <br />
+          <br />
+          <b>Variable Length Subnet Mask (VLSM)</b> is used to reduce wastage of
+          ip addresses in subnetting.
+          <hr />
+          <h4>Steps for subnetting</h4>
+          <ol>
+            <li>Identify the component with maximum connections</li>
+            <li>Write the host part of the given address in binary</li>
+            <li>
+              Solve 2<sup>n</sup>-2 {">"}= (no. of max nodes in 1 component)
+            </li>
+            <li>
+              Reserve last (right-most) n bits and give the rest to network
+              (i.e. make it 1)
+            </li>
+            <li>
+              Find subnet mask and also write starting IP address (xyz/32-n)
+            </li>
+            <li>
+              Divide this into parts of size given by power of 2 where the first
+              one lies from going right to left.
+            </li>
+            <li>
+              All the obtained divisions are the subnets. The first IP address
+              will be the subnet id and the last IP address will be the
+              broadcast id.
+            </li>
+          </ol>
+        </div>
+      </div>
+    ),
+  },
+  {
+    id: 8,
+    title: "Supernetting",
+    content: (
+      <div>
+        <h1>Supernetting</h1>
+        <hr />
+        <div>
+          <ul>
+            <li>AKA prefix aggregation/ route aggregation</li>
+            <li>
+              Done for router so that it doesn’t need to maintain table entry
+              for every small network.
+            </li>
+            <li>
+              Supernetting is combining of two or more IP network / IP
+              subnetwork having a common subnet mask or CIDR.
+            </li>
+            <li>It reduces routing table entries</li>
+            <li>
+              <b>Eg. </b>Suppose two routers R1 and R2 are connected to each
+              other. R1 is connected to 3 networks (n1, n2 and n3). R1's
+              rrouting table will contain entries for the machines in the
+              network n1, n2 and n3. R2's routing table also will contain
+              entries for machines in the network n1, n2 and n3. But this is not
+              required, R2 can store a single address pointing to R1 and then R1
+              will route it to specific computer, hence space is saved
+            </li>
+          </ul>
+          <hr />
+          <h4>Conditions for supernetting</h4>
+          <ul>
+            <li>Contiguous in nature</li>
+            <li>Size of all network should be same</li>
+            <li>Network ID should be divisible by total number of host bits</li>
+          </ul>
+          <hr />
+          <h4>Steps for supernetting</h4>
+          <ol>
+            <li>Convert IP addresses into binary</li>
+            <li>Perform AND operation</li>
+            <li>
+              Find the first bit from LHS where there is a difference in the
+              value.
+            </li>
+            <li>
+              Reserve that bit and all the bits on the right side of it for the
+              host id.
+            </li>
+            <li>
+              Find the supernet id xyz/n (xyz = value of AND, n = 32 - bits
+              reserved for host id).
+            </li>
+          </ol>
+        </div>
+      </div>
+    ),
+  },
 ];
