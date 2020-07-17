@@ -1518,6 +1518,123 @@ export const notes = [
       <div>
         <h1>Dynamic Host Configuration Protocol - DHCP</h1>
         <hr />
+        <ul>
+          <li>DHCP functions at the application layer of TCP/IP stack</li>
+          <li>
+            One of the primary tasks of the protocol is to automatically assign
+            IP addresses to DHCP clients
+          </li>
+          <li>
+            These IP addresses are known as dynamically assigned IP addresses
+          </li>
+          <li>Destination port/ listen - 67</li>
+          <li>Source port/send request - 68</li>
+          <li>DHCP mostly provides private IP addresses</li>
+          <li>
+            These assigned IP addresses change after some time period, again new
+            address is assigned by DHCP server
+          </li>
+          <li>It is based on client-server model</li>
+          <li>DHCP IP address range is called scope</li>
+          <li>
+            Boot P is another method to allocate to IP, but MAC address must be
+            entered manually (DHCP protocol stems from the bootstrap protocol.
+            BOOTP enables client to boot up from the network instead of booting
+            up from the hard drive)
+          </li>
+          <li>DHCP is dynamic BootP</li>
+          <li>It uses UDP port 67 and 68 at Transport layer</li>
+        </ul>
+        <b>DHCP server can provide</b>
+        <ol>
+          <li>IP address</li>
+          <li>Subnet mask</li>
+          <li>Domain name</li>
+          <li>Default gateway</li>
+          <li>DNS server address</li>
+          <li>WiNS server address</li>
+        </ol>
+        <hr />
+        <h4>DORA process (Discover Offer Request Acknowledge)</h4>
+        <ul>
+          <li>
+            It's the process through which client gets IP address from DHCP
+            server.
+          </li>
+          <li>
+            Initially when a new client joins a network it doesn't have any
+            address of its own and others. So it broadcasts a discovery message.
+            This message is intended to be received by a DHCP server to request
+            for an IP address. This message is sent when the client boots up.
+          </li>
+        </ul>
+        <table
+          className="table table-sm table-bordered"
+          style={{ textAlign: "center" }}
+        >
+          <tbody>
+            <tr>
+              <th>DHCP message</th>
+              <th>Description</th>
+            </tr>
+
+            <tr>
+              <td>Discover (port 68)</td>
+              <td>
+                UDP broadcast from DHCP client to locate available DHCP server.
+                Layer 2 (data link) broadcast - FF:FF:FF:FF:FF:FF. Layer 3
+                (network) broadcast - 255.255.255.255
+              </td>
+            </tr>
+            <tr>
+              <td>Offer (port 67)</td>
+              <td>
+                DHCP server to client in response to DHCP discover with offer of
+                configuration parameters (IP address of DHCP server, offer IP,
+                MAC address of client, subnet mask, lease length)
+              </td>
+            </tr>
+            <tr>
+              <td>Request (port 68)</td>
+              <td>
+                Client then broadcast (because multiple DHCP servers possible)
+                to the server a DHCP request message asking for the offered IP
+                address and possible other info.
+              </td>
+            </tr>
+            <tr>
+              <td>Acknowledge (port 67)</td>
+              <td>
+                Server to client with configuration parameters, including
+                committed network address
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <b>DHCP Scope</b>
+        <ul>
+          <li>
+            Set of IP addresses which the DHCP server can assign to clients
+          </li>
+          <li>It is configured by administrator</li>
+        </ul>
+        <b>Super scope :</b> a superscope is the grouping of scopes under one
+        administrative entity that enable the client to obtain IP addresses and
+        renew IP address from any scope that is part of the super scope
+        <br />
+        <br />
+        <b>Super scope is used when:</b>
+        <ul>
+          <li>
+            The existing scope i.e. the IP addresses and supply is being
+            depleted
+          </li>
+          <li>You want to use two DHCP servers on the same subnet</li>
+          <li>
+            You need to move client from one range of IP address to a different
+            range of IP address
+          </li>
+        </ul>
       </div>
     ),
   },
@@ -1528,6 +1645,104 @@ export const notes = [
       <div>
         <h1>Address Resolution Protocol - ARP</h1>
         <hr />
+        <ul>
+          <li>Converts logical address to physical address</li>
+
+          <li>ARP finds MAC address of a host from its known IP address</li>
+          <li>It is a layer 2 protocol (data link)</li>
+          <li>ARP request is a broadcast, but ARP response is a unicast</li>
+          <li>The ARP concept used only in IPv4 environment</li>
+          <li>ARP is never generated for the device of other network</li>
+          <li>ARP request can only be generated within the same network ID</li>
+          <li>Once ARP response is received, it is stored in ARP cache</li>
+        </ul>
+        <hr />
+        <h4>Types of ARP</h4>
+        <ol>
+          <li>ARP</li>
+          <li>Proxy ARP</li>
+          <li>Reverse ARP (physical -{">"} logical address)</li>
+          <li>Gratuitous ARP</li>
+        </ol>
+        <b>Proxy ARP</b>
+        <ul>
+          <li>
+            Proxy ARP is a technique by which a proxy device on a given network
+            answers the ARP queries for an IP address that is not on that
+            network. The proxy is aware of the traffic's destination and offers
+            its own MAC address as destination
+          </li>
+        </ul>
+        <b>Reverse ARP (RARP)</b>
+        <ul>
+          <li>
+            It is a network layer protocol used to obtain an IP address for a
+            given MAC address. The primary limitation of RARP is that each MAC
+            address must be configured manually on a centralized server useful
+            for diskless system.
+          </li>
+        </ul>
+        <b>Gratuitous ARP</b>
+        <ul>
+          <li>
+            Used to verify that two same IP addresses have not been assigned to
+            different machines in a single network
+          </li>
+          <li>
+            Host will broadcast a GARP request in which host will put both
+            source and destination IP address as its own IP address
+          </li>
+          <li>Another machine having same IP will reply</li>
+        </ul>
+        <hr />
+        <h4>Format of ARP packet</h4>
+        <table
+          className="table table-sm table-bordered"
+          style={{ textAlign: "center" }}
+        >
+          <tbody>
+            <tr>
+              <td colSpan="2">Hardware type</td>
+              <td>Protocol type</td>
+            </tr>
+            <tr>
+              <td>Hardware Address Length</td>
+              <td>Protocol Address Length</td>
+              <td>Operation Code (req-1 reply-2)</td>
+            </tr>
+            <tr>
+              <td colSpan="3">Sender H/W address (MAC)</td>
+            </tr>
+            <tr>
+              <td colSpan="3">Sender protocol address (IP address)</td>
+            </tr>
+            <tr>
+              <td colSpan="3">Target H/W address (all 0s)</td>
+            </tr>
+            <tr>
+              <td colSpan="3">Target protocol address</td>
+            </tr>
+          </tbody>
+        </table>
+        <ul>
+          <li>
+            If the destination is in another network then machine will generate
+            ARP request for default gateway (IP address of router interface
+            connected to it on its own network side)
+          </li>
+          <li>
+            Router will send reply to the host with its own MAC address (so host
+            will send packet to it)
+          </li>
+          <li>
+            Simultaneously router will send another ARP request from interface
+            on the destination machine's side to find the MAC address
+          </li>
+          <li>
+            Router will receive the MAC as reply and will forward the packet
+            received from host
+          </li>
+        </ul>
       </div>
     ),
   },
@@ -1538,6 +1753,114 @@ export const notes = [
       <div>
         <h1>WiFi - Wireless Fidelity</h1>
         <hr />
+        <ul>
+          <li>IEEE 802.11 protocol</li>
+          <li>
+            It is a medium to connect devices for sharing data, internet etc.
+          </li>
+          <li>Nowadays used to connect appliances IOT</li>
+          <li>1990 - Vic Hayes - Father of WiFi</li>
+        </ul>
+        <hr />
+
+        <h4>Wifi standards</h4>
+        <ol>
+          <li>
+            <b>IEEE 802.11 (released in 1997)</b>
+            <ul>
+              <li>Worked on 2.4 GHz (unlicensed band i.e. no need to pay)</li>
+            </ul>
+          </li>
+          <li>
+            <b>IEEE 802.11 b (released in 1999)</b>
+            <ul>
+              <li>Operating frequency - 2.4 Ghz</li>
+              <li>Max Data Rate - 11Mbps</li>
+              <li>
+                Devices using this faces interference from microwave oven,
+                bluetooth, cordless transmission.
+              </li>
+            </ul>
+          </li>
+          <li>
+            <b>IEEE 802.11 a (released in 2002)</b>
+            <ul>
+              <li>Operating frequency - 5GHz</li>
+              <li>Data Rate - 1.5 to 54 Mbps</li>
+              <li>
+                Multiplexing techniques - OFDM (orthogonal Frequency Division
+                Multiplexing)
+              </li>
+              <li>
+                Effective range is small due to higher (higher frequency means
+                lower penetrating power)
+              </li>
+            </ul>
+          </li>
+          <li>
+            <b>IEEE 802.11 g (released in 2003)</b>
+            <ul>
+              <li>Operating frequency - 2.4 Ghz</li>
+              <li>Transmission technique - OFDM</li>
+              <li>
+                Backward compatible (can communicate with devices of older
+                standards)
+              </li>
+            </ul>
+          </li>
+          <li>
+            <b>IEEE 802.11 n (released in 2009) (most popular)</b>
+            <ul>
+              <li>Support MIMO (multiple input, multiple output)</li>
+              <li>Operating frequency - 2.4 to 5GHz</li>
+              <li>Data Rate (600 Mbps)</li>
+              <li>Backward compatible</li>
+            </ul>
+          </li>
+          <li>
+            <b>
+              IEEE 802.11 ac (released in 2013) (most mobiles supports this
+              nowadays)
+            </b>
+            <ul>
+              <li>Wider channel - 80 or 160 MHz vs 40 MHz</li>
+              <li>Higher modulation - 256 QAM</li>
+              <li>Support multiuser MIMO</li>
+              <li>Operating frequency 5GHz</li>
+            </ul>
+          </li>
+          <li>
+            <b>IEEE 802.11 ad (released in 2010)</b>
+            <ul>
+              <li>Paid because they do not operate on unlicensed band</li>
+              <li>Names as WiGig</li>
+              <li>Operating frequency - 60 GHz</li>
+              <li>Data Rate - 7 Gbps</li>
+            </ul>
+          </li>
+          <li>
+            <b>IEEE 802.11 af (released in 2014)</b>
+            <ul>
+              <li>Paid because they do not operate on unlicensed band</li>
+              <li>Names as Super-WiFi or White-Fi</li>
+              <li>Operating frequency - 54-790 MHz (very wide range ~20 KM)</li>
+              <li>Supports MIMO</li>
+              <li>Data Rate - 10 Gbps</li>
+            </ul>
+          </li>
+        </ol>
+        <hr />
+        <h4>Wireless security protocols</h4>
+        <ul>
+          <li>WEP (wireless equivalent privacy) easily cracked</li>
+          <li>WPA (wifi protected access) better and stronger encryption</li>
+          <li>WPA 2 (even stronger encryption - AES)</li>
+          <li>WPA 3 (2018)</li>
+          <li>
+            WPS (wifi protected setup) designed to make it easy for devices to
+            join a secure wireless network.
+          </li>
+        </ul>
       </div>
     ),
   },
@@ -1548,6 +1871,53 @@ export const notes = [
       <div>
         <h1>HTTP/HTTPS</h1>
         <hr />
+        <ul>
+          <li>
+            <b>HTTP :</b> works on application layer
+          </li>
+          <li>
+            <b>HTTPS :</b> works on transport layer
+          </li>
+          <li>Used to connect web browser to web server</li>
+          <li>
+            With the help of these protocols information of a particular website
+            is exchanged between web browser and web server.
+          </li>
+          <li>
+            Initially it was used to exchange or serve HTML pages, but nowadays
+            the scope has been increased.
+          </li>
+          <li>HTTP/HTTPS is a stateless protocol but not sessionless</li>
+          <li>
+            HTTP itself is stateless but cookies allows the use of stateful
+            sessions
+          </li>
+          <li>HTTPS requires SSL certificates</li>
+          <li>Both are based on TCP communication</li>
+          <li>HTTP works on port 80</li>
+          <li>HTTPS works on port 443</li>
+        </ul>
+        <b>Component of HTTP based system</b>
+        <ul>
+          <li>Client</li>
+          <li>
+            Proxy (proxies include anything between client and server like
+            router, switches, firewall, gateways)
+          </li>
+          <li>Server</li>
+        </ul>
+        <b>HTTP is a client-server protocol</b> request is sent by one entity or
+        user agent (mostly the web browser)
+        <br />
+        <br />
+        <b>Proxies can perform various functions</b>
+        <ul>
+          <li>Caching (history and browser cache)</li>
+          <li>Filtering (like anti-virus scan)</li>
+          <li>Load balancer (balancing the loads)</li>
+          <li>Authentication</li>
+          <li>Logging (allows storage of historical information)</li>
+        </ul>
       </div>
     ),
   },
