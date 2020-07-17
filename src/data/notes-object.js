@@ -1928,6 +1928,264 @@ export const notes = [
       <div>
         <h1>Other protocols</h1>
         <hr />
+        <h4>File Transfer Protocol (FTP)</h4>
+        <ul>
+          <li>Application layer protocol</li>
+          <li>
+            To transfer files 2 TCP connections are used in parallel
+            <ol>
+              <li>
+                <b>Control connection</b>
+                <ul>
+                  <li>
+                    For sending control info. like user identification,
+                    password, commands to change the remote directory, commands
+                    to retrieve and store files etc.
+                  </li>
+                  <li>It is active throughout the session</li>
+                  <li>It uses TCP port 21</li>
+                </ul>
+              </li>
+              <li>
+                <b>Data connection</b>
+                <ul>
+                  <li>Connection for sending the actual file</li>
+                  <li>It uses TCP port 20</li>
+                </ul>
+              </li>
+            </ol>
+          </li>
+          <li>
+            FTP server has collection of files, the FTP client like file zilla
+            connects to it through internet with a url like ftp.abc.com and
+            files can be downloaded
+          </li>
+          <li>Nowadays used less, was used more before HTTP</li>
+          <li>FTP is not a secure protocol because data is not encrypted</li>
+          <li>
+            It is also used for downloading the files to computer from other
+            servers
+          </li>
+          <li>Popular FTP clients : FileZilla, WinSCP, CyberDuck, gFTP</li>
+          <li>Now we generally use dropbox, google drive in place of FTP</li>
+          <li>
+            FTP allows 3 types of data structure
+            <ol>
+              <li>
+                <b>File structure</b>
+                <ul>
+                  <li>No internal structure</li>
+                  <li>
+                    File is considered to be continuous sequence of data bytes
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <b>Record structure</b>
+                <ul>
+                  <li>File is made up of sequential records</li>
+                </ul>
+              </li>
+              <li>
+                <b>Page structure</b>
+                <ul>
+                  <li>File made up of independent indexed pages</li>
+                </ul>
+              </li>
+            </ol>
+          </li>
+          <li>
+            Transmission modes of FTP
+            <ul>
+              <li>
+                <b>Stream mode :</b> data transmission is continuous stream of
+                bytes
+              </li>
+              <li>
+                <b> Block mode :</b> data transmitted in blocks like 256 bytes
+                or 512 bytes
+              </li>
+              <li>
+                <b>Compressed mode :</b> file is compressed and sent and is used
+                for very large files
+              </li>
+            </ul>
+          </li>
+          <li>
+            <b>FTP commands</b>
+            <ul>
+              <li>
+                Transfer file command
+                <ul>
+                  <li>GET : get file from remote computer</li>
+                  <li>PUT : to send file to server</li>
+                  <li>SEND : send single file</li>
+                </ul>
+              </li>
+              <li>
+                Connect to remote host command
+                <ul>
+                  <li>
+                    USER : the command that sends user identification to the
+                    server
+                  </li>
+                  <li>OPEN : open address</li>
+                  <li>
+                    PASS : the command sends the user password to the server
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Terminate session commands
+                <ul>
+                  <li>CLOSE : disconnect FTP, but does not terminate user</li>
+                  <li>
+                    QUIT : the command fully disconnects remote host and
+                    terminate FTP
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <hr />
+        <h4>Secure File Transfer Protocol (SFTP)</h4>
+        <ul>
+          <li>Data is encrypted</li>
+          <li>SFTP uses SSH/SSL/TLS</li>
+          <li>It uses port 22</li>
+          <li>
+            Designed by IETF (internet engineering task force) as an extended
+            version of SSH 2.0, allowing file transfer over SSH and use with
+            transport layer security (TLS) ans VPN applications
+          </li>
+          <li>SFTP is slower than FTP</li>
+        </ul>
+        <hr />
+        <h4>Trivial File Transfer Protocol (TFTP)</h4>
+        <ul>
+          <li>Mainly used for transferring files within a LAN</li>
+          <li>No encryption</li>
+          <li>It uses UDP therefore unreliable</li>
+          <li>It uses port 69</li>
+          <li>Not used to transfer files over the internet</li>
+          <li>It is good for simple file transfer like during boot time</li>
+          <li>It is fastest among three</li>
+        </ul>
+        <hr />
+        <h4>Simple Mail Transfer Protocol (SMTP)</h4>
+        <ul>
+          <li>
+            SMTP is used by the client to send email to the server (only for
+            sending, not for receiving - for receiving other protocols like IMAP
+            or POP3)
+          </li>
+          <li>SMTP is an application layer protocol</li>
+          <li>
+            It uses TCP port 25 (some web mail services like gmail use
+            unofficial TCP port 465 for SMTP)
+          </li>
+          <li>SMTP is a push protocol</li>
+          <li>SMTP requires each message in 7-bit ASCII format</li>
+        </ul>
+        <b>SMTP commands</b>
+        <ul>
+          <li>
+            <b>HELO and EHLO (extended hello) :</b> commands that initiate a new
+            protocol session between client and server. The EHLO command request
+            them to respond with any optional SMTP extension it support{" "}
+          </li>
+          <li>
+            <b>MAIL FROM :</b> command to initiate sending an email message or
+            to identify sender
+          </li>
+          <li>
+            <b>RCPT :</b> identify intended recipient
+          </li>
+          <li>
+            <b>DATA :</b> command indicating the start of transmission of the
+            email message The last message is "." as a termination character to
+            signify the end of the mail.
+          </li>
+          <li>
+            <b>RSET (reset):</b> reset the connection if it encounters an error
+          </li>
+          <li>
+            <b>NOOP (no operation):</b> empty message like ping to check the
+            responsiveness of the other end
+          </li>
+          <li>
+            <b>QUIT :</b> terminates the protocol session
+          </li>
+        </ul>
+        <b>SMTP Model</b>
+        <p>
+          Sender -{">"} UA(user agent) like gmail, yahoo -{">"} Sent Mail Queue
+          -{">"} MTA (message transfer agent) client {"<"}-TCP port 25-{">"} MTA
+          server -{">"} Recipient Mailbox -{">"} UA -{">"} Receiver
+        </p>
+        <p>
+          <b>MTA :</b> responsible for transferring and routing an email message
+          from the sender's computer to the recipient's computer
+        </p>
+        <b>Mail transfer phases</b>
+        <ol>
+          <li>Connection establishment</li>
+          <li>Message transfer</li>
+          <li>Connection termination</li>
+        </ol>
+
+        <hr />
+        <h4>POP3 and IMAP (message access agent)</h4>
+        <ul>
+          <li>Pull protocol</li>
+          <li>Protocols to receive mail at receiver end</li>
+        </ul>
+        <b>POP3 (Post Office Protocol version 3)</b>
+        <ul>
+          <li>
+            It is a simple protocol that only allows downloading machine from
+            inbox to your local machine
+          </li>
+          <li>
+            It usually deletes the mail from inbox of mail server once it is
+            downloaded, this is because each user has limited storage
+          </li>
+          <li>we can keep the mail by changing the default behaviour</li>
+          <li>
+            The pop server listen on port 110 and the pop with SSL secure server
+            listen on port 995
+          </li>
+          <li>In POP3 the mail can access from a single device at a time</li>
+          <li>
+            To read the mail, it has to be downloaded first. Once downloaded
+            mail can be read in offline mode as well
+          </li>
+          <li>Does not syncs folder structure</li>
+          <li>Does not allow user to organise mails and folders</li>
+          <li>The user cannot create, delete or rename on the mail server</li>
+          <li>Can only search emails after downloading</li>
+        </ul>
+        <b>IMAP (Internet Message Access Protocol version 4)</b>
+        <ul>
+          <li>
+            IMAP is much more advanced and allows the user to see the folder on
+            the mail server (no compulsion of downloading)
+          </li>
+          <li>
+            The IMAP server listens on port 143 and IMAP with SSL secure server
+            listen on port 993
+          </li>
+          <li>It is periodically cached from server to local memory</li>
+          <li>
+            It can be accessed from multiple devices (all are synchronised)
+          </li>
+          <li>The mail content can be read partially before downloading</li>
+          <li>Syncs folder structure</li>
+          <li>The user can organise the mail directly on the mail server</li>
+          <li>The user can create, delete or rename mail on the mail server</li>
+          <li>Can search emails on the server</li>
+        </ul>
       </div>
     ),
   },
